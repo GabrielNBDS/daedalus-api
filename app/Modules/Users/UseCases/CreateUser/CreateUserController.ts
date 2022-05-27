@@ -10,7 +10,7 @@ export default async function CreateUserController({ request, response }: HttpCo
 
   const user = await CreateUserService(email)
 
-  if (user.password) return response.badRequest({ message: 'Email already taken' })
+  if (user.password) return response.badRequest({ errors: [{ message: 'Email already taken' }] })
 
   const signedUrl = Route.builder()
     .qs({ email })

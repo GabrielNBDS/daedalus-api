@@ -8,5 +8,8 @@ export default class CreateUserValidator {
     email: schema.string({ trim: true }, [rules.email()]),
   })
 
-  public messages = {}
+  public messages = {
+    'email.required': 'Email is required',
+    'email.email': 'Invalid email format',
+  }
 }

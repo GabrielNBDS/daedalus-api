@@ -18,7 +18,7 @@ export default async function VerifyEmailController({ request, response }: HttpC
   const signedUrl = Route.builder()
     .qs({ email })
     .prefixUrl('http://localhost:3333')
-    .makeSigned('/users/create-password', { expiresIn: '30min' })
+    .makeSigned('/users/complete-account', { expiresIn: '30min' })
 
   return response.ok({ url: signedUrl })
 }

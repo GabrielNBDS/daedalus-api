@@ -1,7 +1,7 @@
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import User from 'App/Modules/Users/Models/User'
-import CreatePasswordService from 'App/Modules/Users/UseCases/CreatePassword/CreatePasswordService'
-import CreatePasswordValidator from 'App/Modules/Users/UseCases/CreatePassword/CreatePasswordValidator'
+import CompleteAccountService from 'App/Modules/Users/UseCases/CompleteAccount/CompleteAccountService'
+import CompleteAccountValidator from 'App/Modules/Users/UseCases/CompleteAccount/CompleteAccountValidator'
 
 export default async function CreatePasswordController({
   auth,
@@ -20,9 +20,9 @@ export default async function CreatePasswordController({
   // if user already has a password return badRequest
   if (user?.password) return response.badRequest()
 
-  const { name, password } = await request.validate(CreatePasswordValidator)
+  const { name, password } = await request.validate(CompleteAccountValidator)
 
-  await CreatePasswordService(user, name, password)
+  await CompleteAccountService(user, name, password)
 
   const { token } = await auth.use('api').generate(user!)
 

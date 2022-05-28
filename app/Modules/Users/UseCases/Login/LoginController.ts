@@ -12,7 +12,7 @@ export default async function LoginController({ auth, request, response }: HttpC
   try {
     const { token } = await auth.attempt(email, password)
 
-    return response.ok({ token, user })
+    return response.ok({ token, ...user.serialize() })
   } catch {
     return response.badRequest({ errors: [{ message: 'Invalid credentials' }] })
   }

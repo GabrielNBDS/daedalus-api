@@ -15,16 +15,16 @@ export default async function CreatePasswordController({
   // if there is no email return badRequest
   if (!email) return response.badRequest()
 
-  const user = await User.findBy('email', email)
+  const user = (await User.findBy('email', email))!
 
   // if user already has a password return badRequest
   if (user?.password) return response.badRequest()
 
-  const { password } = await request.validate(CreatePasswordValidator)
+  const { name, password } = await request.validate(CreatePasswordValidator)
 
-  await CreatePasswordService(user!, password)
+  await CreatePasswordService(user, name, password)
 
   const { token } = await auth.use('api').generate(user!)
 
-  return response.ok({ token })
+  return response.ok({ token, ...user.serialize() })
 }

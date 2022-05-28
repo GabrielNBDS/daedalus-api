@@ -35,4 +35,5 @@ export default Env.rules({
   SMTP_USERNAME: Env.schema.string(),
   SMTP_PASSWORD: Env.schema.string(),
   CLIENT_VERIFY_EMAIL_URL: Env.schema.string(),
+  SELF_URL: Env.schema.string(),
 })

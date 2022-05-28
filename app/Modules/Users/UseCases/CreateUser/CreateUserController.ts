@@ -14,7 +14,7 @@ export default async function CreateUserController({ request, response }: HttpCo
 
   const signedUrl = Route.builder()
     .qs({ email })
-    .prefixUrl('http://localhost:3333')
+    .prefixUrl(Env.get('SELF_URL'))
     .makeSigned('/users/verify-email', { expiresIn: '30min' })
 
   await Mail.sendLater((message) => {

@@ -1,3 +1,4 @@
+import Env from '@ioc:Adonis/Core/Env'
 import Route from '@ioc:Adonis/Core/Route'
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import User from 'App/Modules/Users/Models/User'
@@ -17,7 +18,7 @@ export default async function VerifyEmailController({ request, response }: HttpC
 
   const signedUrl = Route.builder()
     .qs({ email })
-    .prefixUrl('http://localhost:3333')
+    .prefixUrl(Env.get('SELF_URL'))
     .makeSigned('/users/complete-account', { expiresIn: '30min' })
 
   return response.ok({ url: signedUrl })
